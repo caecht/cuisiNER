@@ -162,13 +162,19 @@ DISPLAY_CONFIG = {
     "colors": {"FILIPINO_FOOD": "#ff6b6b"},  # Red color for Filipino food
     "options": {
         "ents": ["PERSON", "ORG", "GPE", "FILIPINO_FOOD"], 
-        "colors": {"FILIPINO_FOOD": "#ff6b6b"}
+        "colors": {"FILIPINO_FOOD": "#ff6b6b"},
+        "ents_by_label": {
+            "FILIPINO_FOOD": {"color": "#ff6b6b", "textColor": "#ffffff"},
+            "PERSON": {"textColor": "#ffffff"},
+            "ORG": {"textColor": "#ffffff"},
+            "GPE": {"textColor": "#ffffff"}
+        }
     }
 }
 
 # App configuration
 APP_CONFIG = {
-    "title": "Filipino Food NER Recognition",
+    "title": "CuisiNER Filipino Food NER Recognition",
     "description": "This app can recognize Filipino food items like Sinigang, Adobo, Lechon, and many more!",
     "emoji": "🍽️",
     "flag": "🇵🇭"

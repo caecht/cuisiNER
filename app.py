@@ -12,7 +12,7 @@ from filipino_food_config import (
 
 # Page configuration
 st.set_page_config(
-    page_title="Filipino Food NER",
+    page_title="CuisiNER: Filipino Food NER",
     page_icon="🍽️",
     layout="wide"
 )
@@ -36,7 +36,7 @@ sample_texts = get_sample_texts()
 
 # Main app
 def main():
-    st.title(f"{APP_CONFIG['emoji']} {APP_CONFIG['title']} with Streamlit!")
+    st.title(f"{APP_CONFIG['emoji']} {APP_CONFIG['title']}")
     st.markdown(f"*{APP_CONFIG['description']}*")
     
     # Sidebar
@@ -86,11 +86,24 @@ def main():
             - 🌍 Places (GPE)
             - 📅 Dates & Times
             - 💰 Money & Numbers
-            - And more!
             """)
     
+    # CSS for custom button color
+    st.markdown("""
+        <style>
+        .stButton > button {
+            background-color: #82ffb8;
+            color: black;
+        }
+        .stButton > button:hover {
+            background-color: #44b86c;
+            color: white;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+    
     # Analysis button
-    if st.button("🔍 Analyze Text", type="primary", width="stretch"):
+    if st.button("🔍 Analyze Text", use_container_width=True):
         analyze_text(user_input)
 
 def analyze_text(user_input):
@@ -310,15 +323,22 @@ def display_visualization(doc):
 
 def setup_sidebar():
     """Setup the sidebar with information and controls."""
-    st.sidebar.title("About This App")
+    st.sidebar.title("About CusiNER")
     st.sidebar.markdown(f"""
-    This app uses a custom NER model to identify Filipino food items in text.
+    by caecht — Chelsea Creer  
+    
+    CuisiNER uses a custom NER model to identify Filipino food items in text.
+                                       
     
     **Features:**
-    - Recognizes {len(FILIPINO_FOODS)}+ Filipino dishes
+    - Recognizes {len(FILIPINO_FOODS)} Filipino dishes
     - Handles variations and alternative names
     - Real-time entity detection
     - Interactive visualizations
+
+        
+    I built CuisiNER to contribute to Filipino NLP in my own little way and demonstrate how NLP can be customized for specific domains - whether it's brands, specific keywords, or in this case, Filipino food!
+     
     """)
     
     # Model information
@@ -346,24 +366,6 @@ def setup_sidebar():
             if len(foods) > 5:
                 st.write(f"... and {len(foods) - 5} more")
     
-    # Instructions
-    st.sidebar.subheader("How to Use")
-    st.sidebar.markdown("""
-    1. Choose a sample text or enter your own
-    2. Click "Analyze Text" 
-    3. View results in different tabs
-    4. Check the visualization for highlighted entities
-    """)
-    
-    # Advanced options
-    with st.sidebar.expander("Advanced Options"):
-        st.markdown("""
-        **Want to extend this app?**
-        - Add more foods to `FILIPINO_FOODS` list
-        - Train a custom spaCy model for better accuracy
-        - Add support for other cuisines
-        - Implement confidence scoring
-        """)
 
 if __name__ == "__main__":
     main()
